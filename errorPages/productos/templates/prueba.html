@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .page{
+            transform: translateX(100%);
+            animation: slideIn 2.0s forwards;
+        }
+
+        @keyframes slideIn {
+            from {transform: translateX(-100%);}
+            to {transform: translateX(100%);}
+        }
+
+        .pageZ{
+            transform: scale(0.8);
+            animation: zoomIn 2.0s forwards;
+        }
+
+        @keyframes zoomIn {
+            from {transform: scale(0.8); opacity: 0;}
+            to {transform: scale(1); opacity: 1;}
+        }
+    </style>
+</head>
+<body class="pageZ">
+    <h1>Titulo de la página</h1>
+    <img src="https://www.utez.edu.mx/wp-content/uploads/2025/01/Calendario-UTEZ-2025-v2-1024x614.png.webp" alt=""/>
+    <h1>Bievenido a la prueba de animación entre páginas</h1>
+    <a href="{% url 'agregar_producto' %}">Ir a agregar Productos</a>
+
+    <script>
+        //una animación de salida
+        document.querySelectorAll("a").forEach(link =>{
+            link.addEventListener("click", function(event){
+                event.preventDefault();
+                document.body.classList.remove("pageZ")
+                document.body.classList.add("page");
+                setTimeout(() => {
+                    window.location.href = this.href;
+
+                }, 1000);
+            });
+        });
+    </script>
+</body>    
+</html>
